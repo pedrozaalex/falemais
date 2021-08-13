@@ -16,11 +16,11 @@ import {
 } from "@chakra-ui/react";
 
 type Props = BoxProps & {
-  scrollTo: React.MutableRefObject<any>;
+  scrollToRef: React.MutableRefObject<any>;
   isOpen: boolean;
 };
 
-const TabContents = ({ scrollTo, isOpen, ...restOfProps }: Props) => {
+const TabContents = ({ scrollToRef, isOpen, ...restOfProps }: Props) => {
   const animateColor = keyframes`
     0%{background-position:0% 0%}
     100%{background-position:200% 200%}
@@ -57,7 +57,7 @@ const TabContents = ({ scrollTo, isOpen, ...restOfProps }: Props) => {
         pb={4}
         maxWidth="100%"
         shadow="xl"
-        ref={scrollTo}
+        ref={scrollToRef}
         {...restOfProps}
       >
         <Tabs variant="solid-rounded" colorScheme="teal" align="center">
