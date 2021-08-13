@@ -40,12 +40,15 @@ export const Layout = ({ children, title = "FaleMais" }: Props) => (
           py={4}
           lineHeight="initial"
           bg={useColorModeValue("gray.100", "gray.900")}
+          shadow="md"
           zIndex="sticky"
         >
           <Flex alignItems="center">
             <NextChakraLink href="/" fontWeight="bold" fontSize="2rem">
               <HStack align="center">
-                <Text mr={1}>VxTel</Text>
+                <Text mr={1} color={useColorModeValue("gray.600", "white")}>
+                  VxTel
+                </Text>
                 <Image
                   src="/logo.webp"
                   layout="intrinsic"
