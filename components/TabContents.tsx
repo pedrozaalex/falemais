@@ -4,7 +4,6 @@ import {
   TabPanels,
   TabPanel,
   Text,
-  HStack,
   keyframes,
   useColorModeValue,
   Heading,
@@ -13,28 +12,19 @@ import {
   TabList,
   Tabs,
   VStack,
+  ScaleFade,
 } from "@chakra-ui/react";
 
 type Props = BoxProps & {
-  scrollref: React.MutableRefObject<any>;
+  scrollTo: React.MutableRefObject<any>;
+  isOpen: boolean;
 };
 
-export const TabContents = (props: Props) => {
-  // const boxRef = useRef(null);
-
+const TabContents = ({ scrollTo, isOpen, ...restOfProps }: Props) => {
   const animateColor = keyframes`
     0%{background-position:0% 0%}
     100%{background-position:200% 200%}
   `;
-
-  // useEffect(() => {
-  //   if (boxRef?.current) {
-  //     console.log("scrolling...");
-  //     setTimeout(() => {
-  //       boxRef.current.scrollIntoView({ behavior: "smooth" });
-  //     });
-  //   }
-  // }, []);
 
   const Data = () => (
     <VStack fontSize={18}>
@@ -56,46 +46,50 @@ export const TabContents = (props: Props) => {
   );
 
   return (
-    <Box
-      bg={useColorModeValue("gray.100", "gray.900")}
-      borderRadius={8}
-      boxSizing="content-box"
-      mt={2}
-      pt={2}
-      px={4}
-      pb={4}
-      maxWidth="100%"
-      shadow="xl"
-      ref={props.scrollref}
-      {...props}
-    >
-      <Tabs variant="solid-rounded" colorScheme="teal" align="center">
-        <TabList>
-          <Tab>FaleMais 30</Tab>
-          <Tab>FaleMais 60</Tab>
-          <Tab>FaleMais 120</Tab>
-        </TabList>
-        <Heading>Simulação</Heading>
-        <TabPanels textAlign="left">
-          <TabPanel>
-            <Text>Quanto você pagaria:</Text>
-            <br />
-            <Data />
-          </TabPanel>
+    <ScaleFade initialScale={0.9} in={isOpen}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        borderRadius={8}
+        boxSizing="content-box"
+        mt={2}
+        pt={2}
+        px={4}
+        pb={4}
+        maxWidth="100%"
+        shadow="xl"
+        ref={scrollTo}
+        {...restOfProps}
+      >
+        <Tabs variant="solid-rounded" colorScheme="teal" align="center">
+          <TabList>
+            <Tab>FaleMais 30</Tab>
+            <Tab>FaleMais 60</Tab>
+            <Tab>FaleMais 120</Tab>
+          </TabList>
+          <Heading>Simulação</Heading>
+          <TabPanels textAlign="left">
+            <TabPanel>
+              <Text>Quanto você pagaria:</Text>
+              <br />
+              <Data />
+            </TabPanel>
 
-          <TabPanel>
-            <Text align="center">Quanto você pagaria:</Text>
-            <br />
-            <Data />
-          </TabPanel>
+            <TabPanel>
+              <Text align="center">Quanto você pagaria:</Text>
+              <br />
+              <Data />
+            </TabPanel>
 
-          <TabPanel>
-            <Text align="right">Quanto você pagaria:</Text>
-            <br />
-            <Data />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Box>
+            <TabPanel>
+              <Text align="right">Quanto você pagaria:</Text>
+              <br />
+              <Data />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
+    </ScaleFade>
   );
 };
+
+export default React.memo(TabContents);
