@@ -4,10 +4,6 @@ import {
   useColorModeValue,
   IconButton,
   IconButtonProps,
-  Switch,
-  Box,
-  BoxProps,
-  Flex,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -17,30 +13,19 @@ export const ColorModeSwitcher = (props: ColorModeSwitcherProps) => {
   const { toggleColorMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(MoonIcon, SunIcon);
+  const bg = useColorModeValue("gray.200", "gray.800");
 
   return (
-    // <Flex>
-    //   <Switch
-    //     isChecked={useColorModeValue(true, false)}
-    //     colorScheme="teal"
-    //   />
-    //   <SwitchIcon
-    //     onClick={toggleColorMode}
-    //     aria-label={`Switch to ${text} mode`}
-    //     size="sm"
-    //     color="current"
-    //     margin="auto"
-    //     ml={2}
-    //     {...props}
-    //   />
     <IconButton
       size="md"
       fontSize="lg"
-      variant="ghost"
+      variant="solid"
+      bg={bg}
       color="current"
       onClick={toggleColorMode}
       icon={<SwitchIcon />}
       aria-label={`Switch to ${text} mode`}
+      shadow="md"
       {...props}
     />
     // </Flex>
