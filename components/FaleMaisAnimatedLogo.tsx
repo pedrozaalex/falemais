@@ -1,24 +1,25 @@
-import { HeadingProps, Heading, keyframes } from "@chakra-ui/react";
 import React from "react";
+import { HeadingProps, Heading, keyframes, background } from "@chakra-ui/react";
+import Script from "next/experimental-script";
+import { useRef } from "react";
+import { useState } from "react";
 
-export const Logo = (props: HeadingProps) => {
-  const animateColor = keyframes`
-    0%{background-position:50% 50%}
-    100%{background-position:250% 250%}
-  `;
+function Logo(props: HeadingProps) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   return (
     <>
       <Heading
         fontSize={"10vmin"}
-        bgImg="title-background.webp"
-        backgroundSize="200% 200%"
+        bgGradient="linear(45deg, #3bcec4, #1b9288)"
         bgClip="text"
-        animation={`${animateColor} 10s linear infinite`}
+        ref={headingRef}
         {...props}
       >
         FaleMais
       </Heading>
     </>
   );
-};
+}
+
+export default React.memo(Logo);
