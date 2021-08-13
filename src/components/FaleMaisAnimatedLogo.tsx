@@ -8,6 +8,7 @@ function Logo(props: HeadingProps) {
     <>
       <Heading
         fontSize={"10vmin"}
+        mt={8}
         bgGradient="linear(45deg, #3bcec4, #1b9288)"
         bgClip="text"
         ref={headingRef}
