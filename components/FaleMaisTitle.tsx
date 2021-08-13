@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
-import { Logo } from "./FaleMaisAnimatedLogo";
+import Logo from "./FaleMaisAnimatedLogo";
 
 export function FaleMaisTitle() {
   return (

@@ -1,8 +1,5 @@
-import React from "react";
-import { HeadingProps, Heading, keyframes, background } from "@chakra-ui/react";
-import Script from "next/experimental-script";
-import { useRef } from "react";
-import { useState } from "react";
+import React, { useRef } from "react";
+import { HeadingProps, Heading } from "@chakra-ui/react";
 
 function Logo(props: HeadingProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
