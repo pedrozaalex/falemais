@@ -1,38 +1,25 @@
+import React, { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import {
   Box,
   Select,
   FormLabel,
   FormControl,
   FormHelperText,
-  // Slider,
-  // SliderTrack,
-  // SliderFilledTrack,
-  // SliderThumb,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
   Flex,
   VStack,
-  // Tabs,
-  // TabList,
-  // TabPanels,
-  // Tab,
-  // TabPanel,
-  // Text,
-  // HStack,
-  // keyframes,
-  useColorModeValue,
-  // SelectField,
-  ScaleFade,
   useDisclosure,
-  // Slider,
 } from "@chakra-ui/react";
 import { Chakra } from "../Chakra";
 import { Layout } from "../components/Layout";
-import React, { useEffect, useRef, useState } from "react";
 import { FaleMaisTitle } from "../components/FaleMaisTitle";
-import { TabContents } from "../components/TabContents";
-import { DurationInput } from "../components/DurationInput";
-import Slider, { SliderTooltip, Handle, HandleProps } from "rc-slider";
-import { SliderContainer } from "../components/SliderContainer";
-import "rc-slider/assets/index.css";
+import throttled from "lodash/throttle";
+
+const TabContents = dynamic(import("../components/TabContents"));
 
 interface IndexProps {
   cookies?: string;
@@ -42,53 +29,40 @@ const IndexPage = ({ cookies }: IndexProps) => {
   const [callerDDD, setCallerDDD] = useState("");
   const [receiverDDD, setReceiverDDD] = useState("");
   const [duration, setDuration] = useState(0);
-  const { isOpen, onToggle } = useDisclosure();
-  const [showSimulationTab, setShowSimulationTab] = useState(false);
-  const scrollIntoRef = useRef(null);
+  const { isOpen: isSimulationOpen, onToggle: toggleSimulation } =
+    useDisclosure();
+
+  const durationLabelRef = useRef(null);
+  const scrollTo = useRef(null);
+
+  function handleDurationChangeRef(val: number) {
+    if (durationLabelRef?.current?.innerText)
+      durationLabelRef.current.innerText = val;
+  }
 
   function handleDurationChangeEnd(val: React.SetStateAction<number>) {
-    if (!showSimulationTab) setShowSimulationTab(true);
-    if (!val) setShowSimulationTab(false);
+    console.log(
+      `isOpen: ${isSimulationOpen}\ncallerDDD: ${callerDDD}\nreceiverDDD: ${receiverDDD}\nduration: ${duration}\nval: ${val}`
+    );
+
     setDuration(val);
   }
 
+  function showSimulation() {
+    toggleSimulation();
+    if (scrollTo?.current)
+      scrollTo.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   function shouldSimulationToggle() {
-    if (!isOpen && showSimulationTab && callerDDD && receiverDDD && duration) {
-      onToggle();
-
-      if (scrollIntoRef?.current) scrollIntoRef.current.scrollIntoView(false);
+    if (callerDDD && receiverDDD && duration) {
+      if (!isSimulationOpen) showSimulation();
+    } else {
+      if (isSimulationOpen) toggleSimulation();
     }
   }
 
-  function shouldSimulationToggleOnChangeEnd() {
-    if (isOpen && (!callerDDD || !receiverDDD || !duration)) {
-      onToggle();
-    }
-  }
-
-  useEffect(shouldSimulationToggle, [
-    duration,
-    callerDDD,
-    receiverDDD,
-    showSimulationTab,
-  ]);
-
-  useEffect(shouldSimulationToggleOnChangeEnd, [showSimulationTab]);
-
-  function handle(props) {
-    const { value, dragging, index, ...restProps } = props;
-    return (
-      <SliderTooltip
-        prefixCls="rc-slider-tooltip"
-        overlay={value}
-        visible={dragging}
-        placement="top"
-        key={index}
-      >
-        <Handle value={value} {...restProps} />
-      </SliderTooltip>
-    );
-  }
+  useEffect(shouldSimulationToggle, [duration, callerDDD, receiverDDD]);
 
   return (
     <Chakra cookies={cookies}>
@@ -105,6 +79,7 @@ const IndexPage = ({ cookies }: IndexProps) => {
           >
             <FormControl width="fit-content" padding={2}>
               <FormLabel>1. Seu DDD</FormLabel>
+
               <Select
                 variant="filled"
                 placeholder=" "
@@ -146,17 +121,21 @@ const IndexPage = ({ cookies }: IndexProps) => {
             >
               <FormLabel>3. Duração da chamada: </FormLabel>
 
-              {/* <Slider
+              <FormLabel width="100%" fontSize={16} textAlign="center">
+                <div ref={durationLabelRef} style={{ display: "inline" }}>
+                  {duration}
+                </div>{" "}
+                minuto
+                {duration !== 1 ? "s" : ""}
+              </FormLabel>
+              <Slider
                 aria-label="slider-ex-1"
-                value={duration}
-                onChange={setDuration}
-                onChangeEnd={(val) => {
-                  if (!showSimulationTab) setShowSimulationTab(true);
-                  if (!val) setShowSimulationTab(false);
-                }}
+                // throttled here prevents the onChange method from firing >60 times/sec
+                onChange={throttled(handleDurationChangeRef, 17)}
+                onChangeEnd={handleDurationChangeEnd}
                 min={0}
                 max={100}
-                step={10}
+                defaultValue={0}
                 colorScheme="teal"
                 isDisabled={!receiverDDD}
               >
@@ -164,32 +143,17 @@ const IndexPage = ({ cookies }: IndexProps) => {
                   <SliderFilledTrack />
                 </SliderTrack>
                 <SliderThumb shadow="dark-lg" />
-              </Slider> */}
-              {/* <DurationInput /> */}
-              <SliderContainer>
-                <Slider
-                  // onChange={setDuration}
-                  handle={handle}
-                  onAfterChange={handleDurationChangeEnd}
-                  disabled={!receiverDDD}
-                  marks={{ 0: 0, 100: 100 }}
-                />
-              </SliderContainer>
+              </Slider>
 
-              <FormLabel width="100%" fontSize={16} textAlign="center">
-                {duration} minuto{duration !== 1 ? "s" : ""}
-              </FormLabel>
               <FormHelperText>
                 Quanto tempo você vai ficar de prosa
               </FormHelperText>
             </FormControl>
           </Flex>
 
-          <Box maxW="100%">
-            <ScaleFade initialScale={0.9} in={isOpen}>
-              <TabContents scrollref={scrollIntoRef} />
-            </ScaleFade>
-          </Box>
+          <TabContents scrollTo={scrollTo} isOpen={isSimulationOpen} />
+
+          <Box h={10} />
         </VStack>
       </Layout>
     </Chakra>

@@ -9,7 +9,6 @@ import {
   HStack,
   Spacer,
   useColorModeValue,
-  VStack,
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { NextChakraLink } from "./NextChakraLink";
@@ -19,10 +18,10 @@ type Props = {
   title?: string;
 };
 
-export const Layout = ({ children, title = "FaleMais" }: Props) => (
+export const Layout = ({ children }: Props) => (
   <div className="max">
     <Head>
-      <title>{title}</title>
+      <title>FaleMais</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>

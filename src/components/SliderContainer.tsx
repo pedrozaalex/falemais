@@ -1,7 +1,7 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import "rc-slider/assets/index.css";
 
-export const SliderContainer = ({ children }) => {
+export const SliderContainer = ({ children, ...restofProps }) => {
   const styling = {
     ".rc-slider-disabled": {
       bg: `${useColorModeValue("white", "gray.800")}`,
@@ -9,7 +9,7 @@ export const SliderContainer = ({ children }) => {
   };
 
   return (
-    <Box className="durBox" sx={styling}>
+    <Box sx={styling} {...restofProps}>
       {children}
     </Box>
   );
