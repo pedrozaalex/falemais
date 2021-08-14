@@ -8,7 +8,7 @@ import InputWrapContainer from "../components/InputWrapContainer";
 import SelectInput from "../components/SelectInput";
 import SliderInput from "../components/SliderInput";
 
-const TabContents = dynamic(import("../components/TabContents"));
+const SimulationWindow = dynamic(import("../components/SimulationWindow"));
 
 interface IndexProps {
   cookies?: string;
@@ -72,11 +72,12 @@ const IndexPage = ({ cookies }: IndexProps) => {
             />
           </InputWrapContainer>
 
-          <TabContents
+          <SimulationWindow
             scrollToRef={simulationTabRef}
             isOpen={isSimulationOpen}
           />
 
+          {/* TODO: criar e inserir aqui o Footer */}
           <Box h={10} />
         </VStack>
       </Layout>

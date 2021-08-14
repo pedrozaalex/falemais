@@ -20,7 +20,7 @@ type Props = BoxProps & {
   isOpen: boolean;
 };
 
-const TabContents = ({ scrollToRef, isOpen, ...restOfProps }: Props) => {
+const SimulationWindow = ({ scrollToRef, isOpen, ...restOfProps }: Props) => {
   const animateColor = keyframes`
     0%{background-position:0% 0%}
     100%{background-position:200% 200%}
@@ -92,4 +92,4 @@ const TabContents = ({ scrollToRef, isOpen, ...restOfProps }: Props) => {
   );
 };
 
-export default React.memo(TabContents);
+export default React.memo(SimulationWindow);
