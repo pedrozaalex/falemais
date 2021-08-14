@@ -7,6 +7,7 @@ import { FaleMaisTitle } from "../components/FaleMaisTitle";
 import InputWrapContainer from "../components/InputWrapContainer";
 import SelectInput from "../components/SelectInput";
 import SliderInput from "../components/SliderInput";
+import useRegions from "../hooks/useRegions";
 
 const SimulationWindow = dynamic(import("../components/SimulationWindow"));
 
@@ -25,7 +26,6 @@ const IndexPage = ({ cookies }: IndexProps) => {
 
   // for scrolling the simulation tab into view when it opens
   const simulationTabRef = useRef(null);
-
   function showSimulation() {
     toggleSimulation();
     if (simulationTabRef?.current)
@@ -42,6 +42,9 @@ const IndexPage = ({ cookies }: IndexProps) => {
     }
   }, [duration, callerDDD, receiverDDD]);
 
+  // populates the "Caller DDD" select input
+  const regions = useRegions();
+
   return (
     <Chakra cookies={cookies}>
       <Layout>
@@ -52,7 +55,7 @@ const IndexPage = ({ cookies }: IndexProps) => {
             <SelectInput
               title="1. Seu DDD"
               caption="O DDD de onde você mora"
-              options={[11, 16, 17, 18]}
+              options={regions?.map((r) => r.ddd)}
               onChange={(e) => setCallerDDD(e.target.value)}
             />
 

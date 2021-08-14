@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextApiRequest, NextApiResponse } from "next";
 import { Region } from "../../../interfaces/Regions";
 
 const servedLocations: Region[] = [
@@ -48,6 +48,7 @@ const servedLocations: Region[] = [
   },
 ];
 
-export default function handler(_req: Request, res: Response) {
-  res.status(200).json(servedLocations);
+export default function handler(_req: NextApiRequest, res: NextApiResponse) {
+  console.log("regions was requested");
+  return res.status(200).json(servedLocations);
 }

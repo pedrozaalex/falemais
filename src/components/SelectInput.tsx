@@ -33,7 +33,7 @@ export default function SelectInput({
         w="fit-content"
         m="auto"
       >
-        {options.map((opt, idx) => (
+        {options?.map((opt, idx) => (
           <option value={opt} key={idx}>
             {opt}
           </option>
