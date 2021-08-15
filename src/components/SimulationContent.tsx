@@ -1,18 +1,39 @@
-import { TabPanel, VStack, Box, Text, keyframes } from "@chakra-ui/react";
+import { TimeIcon } from "@chakra-ui/icons";
+import { VStack, Box, Text, keyframes } from "@chakra-ui/react";
 import React from "react";
 
-export function SimulationContent(planNumber: number, totalCost: number) {
+type propType = {
+  planNumber: number;
+  normalCost: number;
+  planCost: number;
+  isPicking: boolean;
+};
+
+export function SimulationContent({
+  planNumber,
+  normalCost,
+  planCost,
+  isPicking,
+}: propType) {
   const animateColor = keyframes`
     0%{background-position:0% 0%}
     100%{background-position:200% 200%}
   `;
 
+  const FallbackBar = () => <TimeIcon />;
+
+  const normalPrice = isPicking ? (
+    <FallbackBar />
+  ) : (
+    `R$ ${normalCost?.toFixed(2).replace(".", ",")}`
+  );
+
   return (
-    <TabPanel>
+    <>
       <Text align="center">Quanto você pagaria:</Text>
       <br />
-      <VStack fontSize={18}>
-        <Text>Sem FaleMais: R$ {totalCost.toFixed(2).replace(".", ",")}</Text>
+      <VStack fontSize={18} textAlign="left">
+        <Text>Sem FaleMais: {normalPrice}</Text>
         <Box>
           <Text
             display="inline"
@@ -24,9 +45,13 @@ export function SimulationContent(planNumber: number, totalCost: number) {
           >
             Com FaleMais{planNumber}:{" "}
           </Text>
-          R$ {totalCost.toFixed(2).replace(".", ",")}
+          {isPicking ? (
+            <FallbackBar />
+          ) : (
+            `R$ ${planCost?.toFixed(2).replace(".", ",")}`
+          )}
         </Box>
       </VStack>
-    </TabPanel>
+    </>
   );
 }
