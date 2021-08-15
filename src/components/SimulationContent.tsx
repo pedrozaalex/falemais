@@ -1,15 +1,18 @@
-import { TabPanel, VStack, Box, Text } from "@chakra-ui/react";
+import { TabPanel, VStack, Box, Text, keyframes } from "@chakra-ui/react";
 import React from "react";
 
-export default function TabLayout() {
+export function SimulationContent(planNumber: number, totalCost: number) {
+  const animateColor = keyframes`
+    0%{background-position:0% 0%}
+    100%{background-position:200% 200%}
+  `;
+
   return (
     <TabPanel>
       <Text align="center">Quanto você pagaria:</Text>
       <br />
       <VStack fontSize={18}>
-        <Text>
-          Sem FaleMais: R$ {totalCosts.noFM.toFixed(2).replace(".", ",")}
-        </Text>
+        <Text>Sem FaleMais: R$ {totalCost.toFixed(2).replace(".", ",")}</Text>
         <Box>
           <Text
             display="inline"
@@ -19,9 +22,9 @@ export default function TabLayout() {
             backgroundSize="200% 200%"
             animation={`${animateColor} 10s linear infinite`}
           >
-            Com FaleMais30:{" "}
+            Com FaleMais{planNumber}:{" "}
           </Text>
-          R$ {totalCosts.fm30cost.toFixed(2).replace(".", ",")}
+          R$ {totalCost.toFixed(2).replace(".", ",")}
         </Box>
       </VStack>
     </TabPanel>

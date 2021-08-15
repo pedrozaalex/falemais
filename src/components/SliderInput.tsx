@@ -17,12 +17,7 @@ type Prop = {
   isDisabled?: boolean;
 };
 
-export default function SliderInput({
-  onChangeEnd,
-  title,
-  caption,
-  isDisabled,
-}: Prop) {
+export function SliderInput({ onChangeEnd, title, caption, isDisabled }: Prop) {
   // for fast updating of the "x minuto" labels above the slider
   const durationLabelRef = useRef(null);
 

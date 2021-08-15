@@ -1,7 +1,7 @@
 import { CostsPerPlan } from "../interfaces/CostsPerPlan";
 import { Region } from "../interfaces/Regions";
 
-export default function useCallSimulator(
+export function useCallSimulator(
   callerDDD: number,
   receiverDDD: number,
   duration: number,

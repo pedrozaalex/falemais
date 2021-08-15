@@ -4,7 +4,7 @@ type Props = {
   children: any;
 };
 
-export default function InputWrapContainer({ children }) {
+export function InputWrapContainer({ children }) {
   return (
     <Flex
       width="100%"

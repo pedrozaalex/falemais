@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchWrapper } from "../helpers/fetchWrapper";
 import { Region } from "../interfaces/Regions";
 
-export default function useRegions(selectedDDD: number | undefined) {
+export function useRegions(selectedDDD: number | undefined) {
   const [regions, setRegions] = useState<Region[]>([]);
   const [callableOptions, setCallableOptions] = useState<number[]>([]);
 

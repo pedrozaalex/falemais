@@ -15,7 +15,7 @@ type Prop = {
   isDisabled?: boolean;
 };
 
-export default function SelectInput({
+export function SelectInput({
   onChange,
   title,
   caption,

@@ -4,11 +4,11 @@ import { Box, VStack, useDisclosure } from "@chakra-ui/react";
 import { Chakra } from "../Chakra";
 import { Layout } from "../components/Layout";
 import { FaleMaisTitle } from "../components/FaleMaisTitle";
-import InputWrapContainer from "../components/InputWrapContainer";
-import SelectInput from "../components/SelectInput";
-import SliderInput from "../components/SliderInput";
-import useRegions from "../hooks/useRegions";
-import useCallSimulator from "../hooks/useCallSimulator";
+import { InputWrapContainer } from "../components/InputWrapContainer";
+import { SelectInput } from "../components/SelectInput";
+import { SliderInput } from "../components/SliderInput";
+import { useRegions } from "../hooks/useRegions";
+import { useCallSimulator } from "../hooks/useCallSimulator";
 
 const SimulationWindow = dynamic(import("../components/SimulationWindow"));
 

@@ -12,6 +12,7 @@ function Logo(props: HeadingProps) {
         bgGradient="linear(45deg, #3bcec4, #1b9288)"
         bgClip="text"
         ref={headingRef}
+        pointerEvents="none"
         {...props}
       >
         FaleMais
@@ -20,4 +21,4 @@ function Logo(props: HeadingProps) {
   );
 }
 
-export default React.memo(Logo);
+export const FaleMaisAnimatedLogo = React.memo(Logo);
