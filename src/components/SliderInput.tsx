@@ -47,7 +47,7 @@ export default function SliderInput({
         onChange={throttled(handleDurationChangeRef, 17)}
         onChangeEnd={onChangeEnd}
         min={0}
-        max={100}
+        max={300}
         defaultValue={0}
         colorScheme="teal"
         isDisabled={isDisabled}

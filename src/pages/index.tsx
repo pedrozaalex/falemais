@@ -8,6 +8,7 @@ import InputWrapContainer from "../components/InputWrapContainer";
 import SelectInput from "../components/SelectInput";
 import SliderInput from "../components/SliderInput";
 import useRegions from "../hooks/useRegions";
+import useCallSimulator from "../hooks/useCallSimulator";
 
 const SimulationWindow = dynamic(import("../components/SimulationWindow"));
 
@@ -21,6 +22,12 @@ const IndexPage = ({ cookies }: IndexProps) => {
   const [callDuration, setCallDuration] = useState<number>(0);
 
   const { regions, callableOptions } = useRegions(callerDDD);
+  const totalCosts = useCallSimulator(
+    callerDDD,
+    receiverDDD,
+    callDuration,
+    regions
+  );
 
   // controls the state of the price simulation tab
   const { isOpen: isSimulationOpen, onToggle: toggleSimulation } =
@@ -37,9 +44,11 @@ const IndexPage = ({ cookies }: IndexProps) => {
   // whenever the inputs change, check them and open the simulation tab
   // if they're all present or close it otherwise
   useEffect(() => {
-    if (callerDDD && receiverDDD && callDuration) {
+    if (callerDDD && receiverDDD && callDuration >= 0) {
+      // if all inputs are valid AND the simulation is closed, open the window
       if (!isSimulationOpen) showSimulation();
     } else {
+      // if any of the inputs are invalid AND the simulation window is open, close it
       if (isSimulationOpen) toggleSimulation();
     }
   }, [callDuration, callerDDD, receiverDDD]);
@@ -77,6 +86,7 @@ const IndexPage = ({ cookies }: IndexProps) => {
           <SimulationWindow
             scrollToRef={simulationTabRef}
             isOpen={isSimulationOpen}
+            totalCosts={totalCosts}
           />
 
           {/* TODO: criar e inserir aqui o Footer */}
