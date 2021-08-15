@@ -10,18 +10,29 @@ import {
 } from "@chakra-ui/react";
 import throttled from "lodash/throttle";
 
-type Prop = {
+type SliderInputProps = {
+  onChange?: (val: number) => void;
   onChangeEnd: (val: number) => void;
   title: string;
   caption: string;
   isDisabled?: boolean;
 };
 
-export function SliderInput({ onChangeEnd, title, caption, isDisabled }: Prop) {
+export function SliderInput({
+  onChange,
+  onChangeEnd,
+  title,
+  caption,
+  isDisabled,
+}: SliderInputProps) {
   // for fast updating of the "x minuto" labels above the slider
   const durationLabelRef = useRef(null);
 
   function handleDurationChangeRef(val: number) {
+    if (onChange && typeof onChange === "function") {
+      onChange(val);
+    }
+
     if (durationLabelRef?.current?.innerText)
       durationLabelRef.current.innerText = val;
   }
