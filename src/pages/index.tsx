@@ -16,9 +16,11 @@ interface IndexProps {
 }
 
 const IndexPage = ({ cookies }: IndexProps) => {
-  const [callerDDD, setCallerDDD] = useState("");
-  const [receiverDDD, setReceiverDDD] = useState("");
-  const [duration, setDuration] = useState(0);
+  const [callerDDD, setCallerDDD] = useState<number | undefined>(undefined);
+  const [receiverDDD, setReceiverDDD] = useState<number | undefined>(undefined);
+  const [callDuration, setCallDuration] = useState<number>(0);
+
+  const { regions, callableOptions } = useRegions(callerDDD);
 
   // controls the state of the price simulation tab
   const { isOpen: isSimulationOpen, onToggle: toggleSimulation } =
@@ -33,17 +35,14 @@ const IndexPage = ({ cookies }: IndexProps) => {
   }
 
   // whenever the inputs change, check them and open the simulation tab
-  // if they're all present
+  // if they're all present or close it otherwise
   useEffect(() => {
-    if (callerDDD && receiverDDD && duration) {
+    if (callerDDD && receiverDDD && callDuration) {
       if (!isSimulationOpen) showSimulation();
     } else {
       if (isSimulationOpen) toggleSimulation();
     }
-  }, [duration, callerDDD, receiverDDD]);
-
-  // populates the "Caller DDD" select input
-  const regions = useRegions();
+  }, [callDuration, callerDDD, receiverDDD]);
 
   return (
     <Chakra cookies={cookies}>
@@ -55,22 +54,22 @@ const IndexPage = ({ cookies }: IndexProps) => {
             <SelectInput
               title="1. Seu DDD"
               caption="O DDD de onde você mora"
-              options={regions?.map((r) => r.ddd)}
-              onChange={(e) => setCallerDDD(e.target.value)}
+              options={regions.map((r) => r.ddd)}
+              onChange={(e) => setCallerDDD(parseInt(e.target.value))}
             />
 
             <SelectInput
               title="2. DDD do recebedor"
               caption="O DDD para onde você vai ligar"
-              options={[11, 16, 17, 18]}
-              onChange={(e) => setReceiverDDD(e.target.value)}
+              options={callableOptions}
+              onChange={(e) => setReceiverDDD(parseInt(e.target.value))}
               isDisabled={!callerDDD}
             />
 
             <SliderInput
               caption="Quanto tempo você vai ficar de prosa"
               title="3. Duração da chamada: "
-              onChangeEnd={setDuration}
+              onChangeEnd={setCallDuration}
               isDisabled={!receiverDDD}
             />
           </InputWrapContainer>
