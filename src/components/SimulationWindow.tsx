@@ -21,12 +21,14 @@ type Props = BoxProps & {
   scrollToRef: React.MutableRefObject<any>;
   isOpen: boolean;
   totalCosts: CostsPerPlan | null;
+  isPicking?: boolean;
 };
 
 const component = ({
   scrollToRef,
   isOpen,
   totalCosts,
+  isPicking,
   ...restOfProps
 }: Props) => {
   const animateColor = keyframes`
@@ -50,68 +52,39 @@ const component = ({
           ref={scrollToRef}
           {...restOfProps}
         >
-          {totalCosts ? (
-            <Tabs variant="solid-rounded" colorScheme="teal" align="center">
-              <TabList>
-                <Tab>FaleMais 30</Tab>
-                <Tab>FaleMais 60</Tab>
-                <Tab>FaleMais 120</Tab>
-              </TabList>
-              <TabPanels textAlign="left">
-                <SimulationContent />
-
-                <TabPanel>
-                  <Text align="center">Quanto você pagaria:</Text>
-                  <br />
-                  <VStack fontSize={18}>
-                    <Text>
-                      Sem FaleMais: R${" "}
-                      {totalCosts.noFM.toFixed(2).replace(".", ",")}
-                    </Text>
-                    <Box>
-                      <Text
-                        display="inline"
-                        fontWeight="extrabold"
-                        bgClip="text"
-                        bgImg="title-background.webp"
-                        backgroundSize="200% 200%"
-                        animation={`${animateColor} 10s linear infinite`}
-                      >
-                        Com FaleMais60:{" "}
-                      </Text>
-                      R$ {totalCosts.fm60cost.toFixed(2).replace(".", ",")}
-                    </Box>
-                  </VStack>
-                </TabPanel>
-
-                <TabPanel>
-                  <Text align="center">Quanto você pagaria:</Text>
-                  <br />
-                  <VStack fontSize={18}>
-                    <Text>
-                      Sem FaleMais: R${" "}
-                      {totalCosts.noFM.toFixed(2).replace(".", ",")}
-                    </Text>
-                    <Box>
-                      <Text
-                        display="inline"
-                        fontWeight="extrabold"
-                        bgClip="text"
-                        bgImg="title-background.webp"
-                        backgroundSize="200% 200%"
-                        animation={`${animateColor} 10s linear infinite`}
-                      >
-                        Com FaleMais120:{" "}
-                      </Text>
-                      R$ {totalCosts.fm120cost.toFixed(2).replace(".", ",")}
-                    </Box>
-                  </VStack>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          ) : (
-            "Houve um erro na hora fazer o cálculo do valor da sua ligação, entre em contato com nosso suporte"
-          )}
+          <Tabs variant="solid-rounded" colorScheme="teal" align="center">
+            <TabList>
+              <Tab>FaleMais 30</Tab>
+              <Tab>FaleMais 60</Tab>
+              <Tab>FaleMais 120</Tab>
+            </TabList>
+            <TabPanels textAlign="left">
+              <TabPanel>
+                <SimulationContent
+                  planNumber={30}
+                  planCost={totalCosts?.fm30cost}
+                  normalCost={totalCosts?.noFM}
+                  isPicking={isPicking}
+                />
+              </TabPanel>
+              <TabPanel>
+                <SimulationContent
+                  planNumber={60}
+                  planCost={totalCosts?.fm60cost}
+                  normalCost={totalCosts?.noFM}
+                  isPicking={isPicking}
+                />
+              </TabPanel>
+              <TabPanel>
+                <SimulationContent
+                  planNumber={120}
+                  planCost={totalCosts?.fm120cost}
+                  normalCost={totalCosts?.noFM}
+                  isPicking={isPicking}
+                />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Box>
       </ScaleFade>
     </>

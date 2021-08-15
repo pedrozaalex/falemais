@@ -20,6 +20,7 @@ const IndexPage = ({ cookies }: IndexProps) => {
   const [callerDDD, setCallerDDD] = useState<number | undefined>(undefined);
   const [receiverDDD, setReceiverDDD] = useState<number | undefined>(undefined);
   const [callDuration, setCallDuration] = useState<number>(0);
+  const [isPicking, setIsPicking] = useState(false);
 
   const { regions, callableOptions } = useRegions(callerDDD);
   const totalCosts = useCallSimulator(
@@ -53,6 +54,10 @@ const IndexPage = ({ cookies }: IndexProps) => {
     }
   }, [callDuration, callerDDD, receiverDDD]);
 
+  useEffect(() => {
+    setReceiverDDD(undefined);
+  }, [callerDDD]);
+
   return (
     <Chakra cookies={cookies}>
       <Layout>
@@ -76,9 +81,13 @@ const IndexPage = ({ cookies }: IndexProps) => {
             />
 
             <SliderInput
-              caption="Quanto tempo você vai ficar de prosa"
               title="3. Duração da chamada: "
-              onChangeEnd={setCallDuration}
+              onChange={(_val) => setIsPicking(true)}
+              onChangeEnd={(val) => {
+                setCallDuration(val);
+                setIsPicking(false);
+              }}
+              caption="Quanto tempo você vai ficar de prosa"
               isDisabled={!receiverDDD}
             />
           </InputWrapContainer>
@@ -87,10 +96,11 @@ const IndexPage = ({ cookies }: IndexProps) => {
             scrollToRef={simulationTabRef}
             isOpen={isSimulationOpen}
             totalCosts={totalCosts}
+            isPicking={isPicking}
           />
 
           {/* TODO: criar e inserir aqui o Footer */}
-          <Box h={10} />
+          {/* <Box h={10} /> */}
         </VStack>
       </Layout>
     </Chakra>
