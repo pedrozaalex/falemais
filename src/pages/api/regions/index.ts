@@ -3,45 +3,37 @@ import { Region } from "../../../interfaces/Regions";
 
 const servedLocations: Region[] = [
   {
-    id: 1,
-    cities: ["Região Metropolitana"],
     ddd: 11,
+    cities: ["Região Metropolitana"],
     costs: {
       11: 0.19,
       16: 0.19,
-      17: 0.19,
       18: 0.19,
     },
   },
   {
-    id: 2,
-    cities: ["Araraquara", "Franca", "Ribeirão Preto", "São Carlos"],
     ddd: 16,
+    cities: ["Araraquara", "Franca", "Ribeirão Preto", "São Carlos"],
     costs: {
       11: 0.19,
       16: 0.19,
       17: 0.19,
-      18: 0.19,
     },
   },
   {
-    id: 3,
-    cities: ["Catanduva", "Barretos", "São José do Rio Preto", "Votuporanga"],
     ddd: 17,
+    cities: ["Catanduva", "Barretos", "São José do Rio Preto", "Votuporanga"],
     costs: {
-      11: 0.19,
       16: 0.19,
       17: 0.19,
       18: 0.19,
     },
   },
   {
-    id: 4,
-    cities: ["Presidente Prudente", "Araçatuba", "Birigui", "Assis"],
     ddd: 18,
+    cities: ["Presidente Prudente", "Araçatuba", "Birigui", "Assis"],
     costs: {
       11: 0.19,
-      16: 0.19,
       17: 0.19,
       18: 0.19,
     },
@@ -49,6 +41,5 @@ const servedLocations: Region[] = [
 ];
 
 export default function handler(_req: NextApiRequest, res: NextApiResponse) {
-  console.log("regions was requested");
   return res.status(200).json(servedLocations);
 }
