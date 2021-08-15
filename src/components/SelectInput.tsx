@@ -7,16 +7,11 @@ import {
 import React, { ChangeEventHandler } from "react";
 import { Region } from "../interfaces/Regions";
 
-type OptionType = {
-  value: number;
-  label: string;
-} | null;
-
 type Prop = {
   onChange: ChangeEventHandler<HTMLSelectElement>;
   title: string;
   caption: string;
-  options: OptionType[];
+  options: number[];
   isDisabled?: boolean;
 };
 
@@ -40,7 +35,7 @@ export default function SelectInput({
         m="auto"
       >
         {options?.map((opt, idx) => (
-          <option value={opt.value} key={idx} label={opt.label} />
+          <option value={opt} key={idx} label={opt.toString()} />
         )) ?? "Nenhuma Opção Encontrada"}
       </Select>
       <FormHelperText>{caption}</FormHelperText>
