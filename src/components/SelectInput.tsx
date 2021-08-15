@@ -5,12 +5,18 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler } from "react";
+import { Region } from "../interfaces/Regions";
+
+type OptionType = {
+  value: number;
+  label: string;
+} | null;
 
 type Prop = {
   onChange: ChangeEventHandler<HTMLSelectElement>;
   title: string;
   caption: string;
-  options: number[];
+  options: OptionType[];
   isDisabled?: boolean;
 };
 
@@ -34,10 +40,8 @@ export default function SelectInput({
         m="auto"
       >
         {options?.map((opt, idx) => (
-          <option value={opt} key={idx}>
-            {opt}
-          </option>
-        ))}
+          <option value={opt.value} key={idx} label={opt.label} />
+        )) ?? "Nenhuma Opção Encontrada"}
       </Select>
       <FormHelperText>{caption}</FormHelperText>
     </FormControl>
