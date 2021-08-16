@@ -7,7 +7,7 @@ import {
 import React, { ChangeEventHandler } from "react";
 import { Region } from "../interfaces/Regions";
 
-type Prop = {
+export type SelectInputProps = {
   onChange: ChangeEventHandler<HTMLSelectElement>;
   title: string;
   caption: string;
@@ -21,7 +21,7 @@ export function SelectInput({
   caption,
   options,
   isDisabled,
-}: Prop) {
+}: SelectInputProps) {
   return (
     <FormControl width="fit-content" padding={2} isDisabled={isDisabled}>
       <FormLabel>{title}</FormLabel>

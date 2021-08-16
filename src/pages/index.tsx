@@ -5,7 +5,7 @@ import { Chakra } from "../Chakra";
 import { Layout } from "../components/Layout";
 import { FaleMaisTitle } from "../components/FaleMaisTitle";
 import { InputWrapContainer } from "../components/InputWrapContainer";
-import { SelectInput } from "../components/SelectInput";
+import { SelectInput, SelectInputProps } from "../components/SelectInput";
 import { SliderInput } from "../components/SliderInput";
 import { useRegions } from "../hooks/useRegions";
 import { useCallSimulator } from "../hooks/useCallSimulator";
@@ -58,48 +58,61 @@ const IndexPage = ({ cookies }: IndexProps) => {
     setReceiverDDD(undefined);
   }, [callerDDD]);
 
+  const enabledProps: SelectInputProps = {
+    title: "test",
+    caption: "test",
+    options: [1, 2, 3],
+    isDisabled: false,
+    onChange: (_p) => {
+      return;
+    },
+  };
+
   return (
-    <Chakra cookies={cookies}>
-      <Layout>
-        <VStack p={1} spacing={8} m="auto" fontSize="xl">
-          <FaleMaisTitle />
+    <>
+      <SelectInput {...enabledProps} />
+      <Chakra cookies={cookies}>
+        <Layout>
+          <VStack p={1} spacing={8} m="auto" fontSize="xl">
+            <FaleMaisTitle />
 
-          <InputWrapContainer>
-            <SelectInput
-              title="1. Seu DDD"
-              caption="O DDD de onde você mora"
-              options={regions.map((r) => r.ddd)}
-              onChange={(e) => setCallerDDD(parseInt(e.target.value))}
+            <InputWrapContainer>
+              <SelectInput
+                title="1. Seu DDD"
+                caption="O DDD de onde você mora"
+                options={regions.map((r) => r.ddd)}
+                onChange={(e) => setCallerDDD(parseInt(e.target.value))}
+              />
+
+              <SelectInput
+                title="2. DDD do recebedor"
+                caption="O DDD para onde você vai ligar"
+                options={callableOptions}
+                onChange={(e) => setReceiverDDD(parseInt(e.target.value))}
+                isDisabled={!callerDDD}
+              />
+
+              <SliderInput
+                title="3. Duração da chamada: "
+                onChangeEnd={(val) => setCallDuration(val)}
+                caption="Quanto tempo você vai ficar de prosa"
+                isDisabled={!receiverDDD}
+              />
+            </InputWrapContainer>
+
+            <SimulationWindow
+              scrollToRef={simulationTabRef}
+              isOpen={isSimulationOpen}
+              totalCosts={totalCosts}
+              isPicking={isPicking}
             />
 
-            <SelectInput
-              title="2. DDD do recebedor"
-              caption="O DDD para onde você vai ligar"
-              options={callableOptions}
-              onChange={(e) => setReceiverDDD(parseInt(e.target.value))}
-              isDisabled={!callerDDD}
-            />
-
-            <SliderInput
-              title="3. Duração da chamada: "
-              onChangeEnd={(val) => setCallDuration(val)}
-              caption="Quanto tempo você vai ficar de prosa"
-              isDisabled={!receiverDDD}
-            />
-          </InputWrapContainer>
-
-          <SimulationWindow
-            scrollToRef={simulationTabRef}
-            isOpen={isSimulationOpen}
-            totalCosts={totalCosts}
-            isPicking={isPicking}
-          />
-
-          {/* TODO: criar e inserir aqui o Footer */}
-          {/* <Box h={10} /> */}
-        </VStack>
-      </Layout>
-    </Chakra>
+            {/* TODO: criar e inserir aqui o Footer */}
+            {/* <Box h={10} /> */}
+          </VStack>
+        </Layout>
+      </Chakra>
+    </>
   );
 };
 
