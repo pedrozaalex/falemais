@@ -82,11 +82,7 @@ const IndexPage = ({ cookies }: IndexProps) => {
 
             <SliderInput
               title="3. Duração da chamada: "
-              onChange={(_val) => setIsPicking(true)}
-              onChangeEnd={(val) => {
-                setCallDuration(val);
-                setIsPicking(false);
-              }}
+              onChangeEnd={(val) => setCallDuration(val)}
               caption="Quanto tempo você vai ficar de prosa"
               isDisabled={!receiverDDD}
             />
