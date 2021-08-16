@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-type ColorModeSwitcherProps = Omit<IconButtonProps, "aria-label">;
+export type ColorModeSwitcherProps = Omit<IconButtonProps, "aria-label">;
 
 export const ColorModeSwitcher = (props: ColorModeSwitcherProps) => {
   const { toggleColorMode } = useColorMode();
