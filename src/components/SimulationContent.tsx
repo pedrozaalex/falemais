@@ -1,4 +1,3 @@
-import { TimeIcon } from "@chakra-ui/icons";
 import { VStack, Box, Text, keyframes } from "@chakra-ui/react";
 import React from "react";
 

@@ -58,9 +58,12 @@ const IndexPage = ({ cookies }: IndexProps) => {
     setReceiverDDD(undefined);
   }, [callerDDD]);
 
+  const title = "testTitle";
+  const caption = "testCaption";
+
   const enabledProps: SelectInputProps = {
-    title: "test",
-    caption: "test",
+    title: title,
+    caption: caption,
     options: [1, 2, 3],
     isDisabled: false,
     onChange: (_p) => {
@@ -77,6 +80,8 @@ const IndexPage = ({ cookies }: IndexProps) => {
             <FaleMaisTitle />
 
             <InputWrapContainer>
+              <SelectInput {...enabledProps} />
+
               <SelectInput
                 title="1. Seu DDD"
                 caption="O DDD de onde você mora"

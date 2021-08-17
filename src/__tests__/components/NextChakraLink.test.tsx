@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "../../helpers/testHelper";
 import "@testing-library/jest-dom";
 import "jest-extended";
 
@@ -8,8 +8,8 @@ import {
   NextChakraLinkProps,
 } from "../../components/NextChakraLink";
 
-describe("<ColorModeSwitcher />", () => {
-  it("renders the ColorModeSwitcher component", () => {
+describe("<NextChakraLink />", () => {
+  it("renders the NextChakraLink component", () => {
     const enabledProps: NextChakraLinkProps = {
       href: "test.com",
     };

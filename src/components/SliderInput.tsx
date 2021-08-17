@@ -1,4 +1,4 @@
-import React, { useRef, ChangeEventHandler } from "react";
+import React, { useRef } from "react";
 import {
   FormControl,
   FormLabel,
@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import throttled from "lodash/throttle";
 
-type SliderInputProps = {
+export type SliderInputProps = {
   onChange?: (val: number) => void;
   onChangeEnd: (val: number) => void;
   title: string;
@@ -33,8 +33,9 @@ export function SliderInput({
       onChange(val);
     }
 
-    if (durationLabelRef?.current?.innerText)
+    if (durationLabelRef && durationLabelRef.current !== null) {
       durationLabelRef.current.innerText = val;
+    }
   }
 
   return (

@@ -1,14 +1,17 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "../../helpers/testHelper";
 import "@testing-library/jest-dom";
 import "jest-extended";
 
 import { SelectInput, SelectInputProps } from "../../components/SelectInput";
 
-describe("<ColorModeSwitcher />", () => {
+describe("<SelectInput />", () => {
+  const title = "testTitle";
+  const caption = "testCaption";
+
   const enabledProps: SelectInputProps = {
-    title: "test",
-    caption: "test",
+    title: title,
+    caption: caption,
     options: [1, 2, 3],
     isDisabled: false,
     onChange: (_p) => {
@@ -18,6 +21,11 @@ describe("<ColorModeSwitcher />", () => {
 
   const component = render(<SelectInput {...enabledProps} />);
 
-  it("renders the ColorModeSwitcher component", () =>
-    expect(component).toBeTruthy());
+  it("renders the SelectInput component", () => expect(component).toBeTruthy());
+
+  it("displays the provided title and caption", () => {
+    render(<SelectInput {...enabledProps} />);
+    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(screen.getByText(caption)).toBeInTheDocument();
+  });
 });

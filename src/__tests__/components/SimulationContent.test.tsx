@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render } from "../../helpers/testHelper";
 import "@testing-library/jest-dom";
 import "jest-extended";
 
@@ -8,20 +8,15 @@ import {
   SimulationContentProps,
 } from "../../components/SimulationContent";
 
-describe("<ColorModeSwitcher />", () => {
+describe("<SimulationContent />", () => {
   const enabledProps: SimulationContentProps = {
     normalCost: 123,
     planCost: 321,
     planNumber: 42,
   };
 
-  const component = render(<SimulationContent {...enabledProps} />);
-
-  it("renders the ColorModeSwitcher component", () =>
-    expect(component).toBeTruthy());
-
-  it("should display normal call cost", () => {
-    const normal = component.findAllByText(/R$ 123,00/);
-    expect(normal).toBeTruthy();
+  it("renders the SimulationContent component", () => {
+    const component = render(<SimulationContent {...enabledProps} />);
+    expect(component).toBeTruthy();
   });
 });
