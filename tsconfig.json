@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "src",
     "allowJs": true,
-    "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -16,7 +15,6 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
     "target": "esnext"
   },
   "exclude": ["node_modules"],
