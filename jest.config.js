@@ -1,5 +1,7 @@
 module.exports = {
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   testEnvironment: "jsdom",
+  testPathIgnorePatterns: ["/node_modules/", "/.next/"],
+  setupFilesAfterEnv: ["<rootDir>/.jest/setup.ts"],
+  snapshotSerializers: ["@emotion/jest/serializer"],
+  modulePaths: ["<rootDir>/src/"],
 };
