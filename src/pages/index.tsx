@@ -58,30 +58,14 @@ const IndexPage = ({ cookies }: IndexProps) => {
     setReceiverDDD(undefined);
   }, [callerDDD]);
 
-  const title = "testTitle";
-  const caption = "testCaption";
-
-  const enabledProps: SelectInputProps = {
-    title: title,
-    caption: caption,
-    options: [1, 2, 3],
-    isDisabled: false,
-    onChange: (_p) => {
-      return;
-    },
-  };
-
   return (
     <>
-      <SelectInput {...enabledProps} />
       <Chakra cookies={cookies}>
         <Layout>
           <VStack p={1} spacing={8} m="auto" fontSize="xl">
             <FaleMaisTitle />
 
             <InputWrapContainer>
-              <SelectInput {...enabledProps} />
-
               <SelectInput
                 title="1. Seu DDD"
                 caption="O DDD de onde você mora"
