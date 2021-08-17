@@ -2,11 +2,11 @@ import { CostsPerPlan } from "../interfaces/CostsPerPlan";
 import { Region } from "../interfaces/Regions";
 
 export function useCallSimulator(
-  callerDDD: number,
-  receiverDDD: number,
-  duration: number,
+  callerDDD: number | undefined,
+  receiverDDD: number | undefined,
+  duration: number | undefined,
   regions: Region[]
-): CostsPerPlan | null {
+): CostsPerPlan | undefined {
   if (!callerDDD || !receiverDDD || !regions) return null;
 
   const callerRegion = regions.find((r) => r.ddd === callerDDD);
