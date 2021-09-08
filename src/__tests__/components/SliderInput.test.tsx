@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "../../helpers/testHelper";
+import { render, screen } from "../../helpers/testHelper";
 import "@testing-library/jest-dom";
 import "jest-extended";
 

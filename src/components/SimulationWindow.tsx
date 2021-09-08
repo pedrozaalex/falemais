@@ -3,15 +3,12 @@ import {
   Box,
   TabPanels,
   TabPanel,
-  Text,
-  keyframes,
   useColorModeValue,
   Heading,
   BoxProps,
   Tab,
   TabList,
   Tabs,
-  VStack,
   ScaleFade,
 } from "@chakra-ui/react";
 import { CostsPerPlan } from "../interfaces/CostsPerPlan";
@@ -21,21 +18,14 @@ type Props = BoxProps & {
   scrollToRef: React.MutableRefObject<any>;
   isOpen: boolean;
   totalCosts: CostsPerPlan | null;
-  isPicking?: boolean;
 };
 
 const component = ({
   scrollToRef,
   isOpen,
   totalCosts,
-  isPicking,
   ...restOfProps
 }: Props) => {
-  const animateColor = keyframes`
-    0%{background-position:0% 0%}
-    100%{background-position:200% 200%}
-  `;
-
   return (
     <>
       <Heading>Simulação:</Heading>
@@ -64,7 +54,6 @@ const component = ({
                   planNumber={30}
                   planCost={totalCosts?.fm30cost}
                   normalCost={totalCosts?.noFM}
-                  isPicking={isPicking}
                 />
               </TabPanel>
               <TabPanel>
@@ -72,7 +61,6 @@ const component = ({
                   planNumber={60}
                   planCost={totalCosts?.fm60cost}
                   normalCost={totalCosts?.noFM}
-                  isPicking={isPicking}
                 />
               </TabPanel>
               <TabPanel>
@@ -80,7 +68,6 @@ const component = ({
                   planNumber={120}
                   planCost={totalCosts?.fm120cost}
                   normalCost={totalCosts?.noFM}
-                  isPicking={isPicking}
                 />
               </TabPanel>
             </TabPanels>

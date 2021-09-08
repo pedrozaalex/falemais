@@ -5,7 +5,6 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler } from "react";
-import { Region } from "../interfaces/Regions";
 
 export type SelectInputProps = {
   onChange: ChangeEventHandler<HTMLSelectElement>;

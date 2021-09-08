@@ -1,9 +1,5 @@
 import { Flex } from "@chakra-ui/layout";
 
-type Props = {
-  children: any;
-};
-
 export function InputWrapContainer({ children }) {
   return (
     <Flex

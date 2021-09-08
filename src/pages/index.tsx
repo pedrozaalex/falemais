@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { Box, VStack, useDisclosure } from "@chakra-ui/react";
+import { VStack, useDisclosure } from "@chakra-ui/react";
 import { Chakra } from "../Chakra";
 import { Layout } from "../components/Layout";
 import { FaleMaisTitle } from "../components/FaleMaisTitle";
 import { InputWrapContainer } from "../components/InputWrapContainer";
-import { SelectInput, SelectInputProps } from "../components/SelectInput";
+import { SelectInput } from "../components/SelectInput";
 import { SliderInput } from "../components/SliderInput";
 import { useRegions } from "../hooks/useRegions";
 import { useCallSimulator } from "../hooks/useCallSimulator";
@@ -20,7 +20,6 @@ const IndexPage = ({ cookies }: IndexProps) => {
   const [callerDDD, setCallerDDD] = useState<number | undefined>(undefined);
   const [receiverDDD, setReceiverDDD] = useState<number | undefined>(undefined);
   const [callDuration, setCallDuration] = useState<number>(0);
-  const [isPicking, setIsPicking] = useState(false);
 
   const { regions, callableOptions } = useRegions(callerDDD);
   const totalCosts = useCallSimulator(
@@ -93,7 +92,6 @@ const IndexPage = ({ cookies }: IndexProps) => {
               scrollToRef={simulationTabRef}
               isOpen={isSimulationOpen}
               totalCosts={totalCosts}
-              isPicking={isPicking}
             />
 
             {/* TODO: criar e inserir aqui o Footer */}
