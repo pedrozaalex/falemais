@@ -1,4 +1,6 @@
+<center>
 # FaleMais
+</center>
 
 ![Screenshot](.github/screen.png)
 
