@@ -1,3 +1,9 @@
+# FaleMais
+
+![Screenshot](.github/screen.png)
+
+### Primeiros Passos
+
 Para rodar o projeto basta fazer:
 
 ```bash
