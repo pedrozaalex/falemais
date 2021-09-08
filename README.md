@@ -1,6 +1,4 @@
-<center>
-<h1>FaleMais</h1>
-</center>
+<h1 align="center">FaleMais</h1>
 
 ![Screenshot](.github/screen.png)
 
