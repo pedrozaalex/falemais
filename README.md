@@ -1,5 +1,5 @@
 <center>
-# FaleMais
+<h1>FaleMais</h1>
 </center>
 
 ![Screenshot](.github/screen.png)
