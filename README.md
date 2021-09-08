@@ -1,4 +1,4 @@
-<h1 align="center">FaleMais</h1>
+# FaleMais
 
 ![Screenshot](.github/screen.png)
 
